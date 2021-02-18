@@ -1,12 +1,14 @@
 package me.whiteship.interview._01_array_03;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TwoSum {
 
     public static void main(String[] args) {
         TwoSum twoSum = new TwoSum();
-        System.out.println(Arrays.toString(twoSum.solution(new int[]{2, 3, 5, 7}, 8)));
+        System.out.println(Arrays.toString(twoSum.solution2(new int[]{2, 3, 4, 7}, 6)));
     }
 
     /**
@@ -19,8 +21,31 @@ public class TwoSum {
      * @param target
      * @return
      */
-    private int[] solution(int[] numbers, int target) {
-        return null;
+    private int[] solution1(int[] numbers, int target) {
+        for (int i = 0; i < numbers.length; i++) {
+        	for (int j = i + 1; j < numbers.length; j++) {
+        		if (numbers[i] + numbers[j] == target) {
+        			return new int[] {i, j};
+        		}
+        	}
+        }
+    	
+    	return null;
+    }
+    
+    private int[] solution2(int[] numbers, int target) {
+        Map<Integer, Integer> numberMap = new HashMap<>();
+        
+        for (int i = 0; i < numbers.length; i++) {
+        	int numberToFind = target - numbers[i];
+        	if (numberMap.containsKey(numberToFind) && i != numberMap.get(numberToFind)) {
+        		return new int[] {i, numberMap.get(numberToFind)};
+        	}
+        	
+        	numberMap.put(numbers[i], i);
+        }
+    	
+    	return null;
     }
 
 }
