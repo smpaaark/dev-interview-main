@@ -1,5 +1,8 @@
 package me.whiteship.interview._02_list_02;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LinkedList {
 
     private LinkedNode head;
@@ -13,18 +16,64 @@ public class LinkedList {
         list.add(new LinkedNode(4));
 
         list.print();
-        LinkedNode node = list.findFromLast(2);
+//        LinkedNode node = list.findFromLast(2);
+//        LinkedNode node = list.findFromLast2(2);
+        LinkedNode node = list.findFromLast3(2);
         System.out.println(node.number);
     }
 
-    /**
+    private LinkedNode findFromLast3(int n) {
+		LinkedNode left = this.head;
+		LinkedNode right = this.head;
+		int count = 0;
+		while (right.next != null) {
+			if (count == n - 1) {
+				left = left.next;
+				right = right.next;
+			} else if (count++ < n) {
+				right = right.next;
+			}
+		}
+		
+		return left;
+	}
+
+	private LinkedNode findFromLast2(int n) {
+		LinkedNode current = this.head;
+		int length = 0;
+		
+		while (current != null) {
+			length++;
+			current = current.next;
+		}
+		
+		int targetIndex = length - n;
+		
+		LinkedNode target = this.head;
+		while (targetIndex > 0) {
+			targetIndex--;
+			target = target.next;
+		}
+		
+		return target;
+	}
+
+	/**
      * TODO 단일 연결 리스트의 끝에서 n번째에 위치한 노드를 찾는 함수를 구현하라.
      *  예) findFromLast(1 -> 4 -> 2 -> 3, 2), 끝에서 2번째에 위치한 2를 리턴한다.
      * @param n
      * @return
      */
     private LinkedNode findFromLast(int n) {
-        return null;
+        Map<Integer, LinkedNode> nodeMap = new HashMap<>();
+        int index = 0;
+        LinkedNode current = this.head;
+        while (current != null) {
+        	nodeMap.put(index++, current);
+        	current = current.next;
+        }
+        
+        return nodeMap.get(nodeMap.size() - n);
     }
 
     private void print() {
@@ -36,7 +85,7 @@ public class LinkedList {
     }
 
     private void add(LinkedNode node) {
-        if (head == null) {
+        if (head == null) { 
             head = node;
             tail = node;
         } else if (tail != null) {
