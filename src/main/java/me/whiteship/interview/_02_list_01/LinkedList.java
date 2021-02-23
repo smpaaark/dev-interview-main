@@ -12,12 +12,12 @@ public class LinkedList {
         list.add(new LinkedNode(3));
 
         list.print();
-        list.reverse();
+        list.reverse3();
 
         list.print();
     }
 
-    private void print() {
+	private void print() {
         LinkedNode nodeToPrint = this.head;
         while(nodeToPrint != null) {
             System.out.println(nodeToPrint.number);
@@ -40,8 +40,54 @@ public class LinkedList {
      *  예) 1 -> 2 -> 3   =>   3 -> 2 -> 1
      * @return
      */
-    private void reverse() {
-
+    private void reverse1() {
+    	LinkedNode current = this.head;
+    	LinkedNode prev = null;
+    	LinkedNode next = null;
+    	
+    	while (current != null) {
+    		next = current.next;
+    		current.next = prev;
+    		prev = current;
+    		current = next;
+    	}
+    	
+    	this.tail = this.head;
+    	this.head = prev;
     }
+    
+    private void reverse2() {
+    	LinkedNode head = this.head;
+    	this.head = reverseRecursive(head);
+    	this.tail = head;
+    }
+
+	private LinkedNode reverseRecursive(LinkedNode node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+		
+		LinkedNode newHead = reverseRecursive(node.next);
+		node.next.next = node;
+		node.next = null;
+		
+		return newHead;
+	}
+	
+	private void reverse3() {
+		this.tail = this.head;
+		solution(this.head);
+	}
+
+	private void solution(LinkedNode node) {
+		if (node.next == null) {
+			this.head = node;
+			return;
+		}
+		
+		solution(node.next);
+		node.next.next = node;
+		node.next = null;
+	}
 
 }
