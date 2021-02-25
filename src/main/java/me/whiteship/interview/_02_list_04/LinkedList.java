@@ -83,9 +83,4 @@ public class LinkedList {
         }
     }
 
-	public char[] solution() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
