@@ -1,5 +1,8 @@
 package me.whiteship.interview._02_list_04;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LinkedList {
 
     private LinkedNode head;
@@ -16,10 +19,30 @@ public class LinkedList {
         list.add(node3);
 
 //        list.print();
-        System.out.println(list.hasCircle());
+        System.out.println(list.hasCircle2());
     }
 
-    /**
+    private boolean hasCircle2() {
+		LinkedNode slow = this.head;
+		LinkedNode fast = this.head;
+		
+		while (slow != null && fast != null) {
+			if (fast.next == null || fast.next.next == null) {
+				return false;
+			}
+			
+			fast = fast.next.next;
+			if (slow == fast) {
+				return true;
+			}
+			
+			slow = slow.next;
+		}
+		
+		return false;
+	}
+
+	/**
      * TODO 주어진 연결 리스트가 원형 연결 리스트인지 단일 연결 리스트인지 확인하는 함수를 구현하라.
      *  예) 1 -> 2 -> 3 -> 1   => true
      *  예) 1 -> 2 -> 3 -> 2   => true
@@ -27,6 +50,18 @@ public class LinkedList {
      * @return
      */
     private boolean hasCircle() {
+        Set<LinkedNode> nodeSet = new HashSet<>();
+        LinkedNode current = this.head;
+        while (current != null) {
+        	if (nodeSet.contains(current)) {
+        		return true;
+        	} else {
+        		nodeSet.add(current);
+        	}
+        	
+        	current = current.next;
+        }
+        
         return false;
     }
 
