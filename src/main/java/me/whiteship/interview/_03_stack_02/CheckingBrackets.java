@@ -1,5 +1,9 @@
 package me.whiteship.interview._03_stack_02;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
+
 public class CheckingBrackets {
 
     public static void main(String[] args) {
@@ -17,6 +21,26 @@ public class CheckingBrackets {
      *  예) [{1 + 2 * (2 + 2)} - [1 - 3)]   => false
      */
     private boolean check(String mathExpression) {
-        return false;
+    	Stack<Character> brackets = new Stack<>();
+    	char[] chars = mathExpression.toCharArray();
+    	List<Character> openingBrackets = Arrays.asList('(', '{', '[');
+    	List<Character> closingBrackets = Arrays.asList(')', '}', ']');
+    	for (char c : chars) {
+    		if (openingBrackets.contains(c)) {
+    			brackets.push(c);
+    		} else if (closingBrackets.contains(c)) {
+    			if (brackets.isEmpty()) {
+    				return false;
+    			}
+    			
+    			Character openingBracket = brackets.pop();
+    			if (openingBrackets.indexOf(openingBracket) != closingBrackets.indexOf(c)) {
+    				return false;
+    			}
+    		}
+    	}
+    	
+        return brackets.isEmpty();
     }
+    
 }
