@@ -19,33 +19,33 @@ public class EvaluationPostfix {
      *  예) 123+-5*  => -20
      */
     private int evaluate(String postfix) {
-        postfix = postfix.trim();
+    	postfix = postfix.trim();
         LinkedList<Integer> numbers = new LinkedList<>();
-        for (int i = 0; i < postfix.length(); i++) {
-             char c = postfix.charAt(i);
-             if (Character.isDigit(c)) {
-                 numbers.push(c - '0');
-             } else {
-                 int right = numbers.pop();
-                 int left = numbers.pop();
-
-                 switch (c) {
-                     case '+':
-                         numbers.push(left + right);
-                         break;
-                     case '-':
-                         numbers.push(left - right);
-                         break;
-                     case '*':
-                         numbers.push(left * right);
-                         break;
-                     case '/':
-                         numbers.push(left / right);
-                         break;
-                 }
-             }
+        for (int i = 0; i <postfix.length(); i++) {
+        	char c = postfix.charAt(i);
+        	if (Character.isDigit(c)) {
+        		numbers.push(c - '0'); // '2'
+        	} else {
+        		int right = numbers.pop();
+        		int left = numbers.pop();
+        		
+        		switch (c) {
+        		case '+':
+        			numbers.push(left + right);
+        			break;
+        		case '-':
+        			numbers.push(left - right);
+        			break;
+        		case '*':
+        			numbers.push(left * right);
+        			break;
+        		case '/':
+        			numbers.push(left / right);
+        			break;
+        		}
+        	}
         }
-
+        
         return numbers.pop();
     }
 }
