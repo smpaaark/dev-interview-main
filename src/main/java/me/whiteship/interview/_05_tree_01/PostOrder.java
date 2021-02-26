@@ -31,11 +31,11 @@ public class PostOrder {
      */
     private void print(Node root, int index) {
         if (root != null) {
-            print(root.left, index);
-            print(root.right, index);
-            if (count++ == index) {
-                System.out.println(root.value);
-            }
+        	print(root.left, index);
+        	print(root.right, index);
+        	if (count++ == index) {
+        		System.out.println(root.value);
+        	}
         }
     }
 }

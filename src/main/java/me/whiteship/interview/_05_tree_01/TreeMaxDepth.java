@@ -29,16 +29,15 @@ public class TreeMaxDepth {
      */
     private int solution(Node root) {
         if (root == null) {
-            return 0;
+        	return 0;
         }
-
+        
         int leftDepth = solution(root.left);
         int rightDepth = solution(root.right);
-
         if (leftDepth > rightDepth) {
-            return leftDepth + 1;
+        	return leftDepth + 1;
         } else {
-            return rightDepth + 1;
+        	return rightDepth + 1;
         }
     }
 }
