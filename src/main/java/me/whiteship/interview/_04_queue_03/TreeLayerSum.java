@@ -35,32 +35,32 @@ public class TreeLayerSum {
      */
     private int maxSum(Node root) {
         if (root == null) {
-            return 0;
+        	return 0;
         }
-
+        
         int result = root.value;
-
         Queue<Node> q = new LinkedList<>();
         q.offer(root);
-
+        
         while (!q.isEmpty()) {
-            int count = q.size();
-            int sum = 0;
-            while (count > 0) {
-                count--;
-                Node node = q.poll();
-                sum += node.value;
-                if (node.left != null) {
-                    q.offer(node.left);
-                }
-
-                if (node.right != null) {
-                    q.offer(node.right);
-                }
-            }
-            result = Math.max(result, sum);
+        	int count = q.size();
+        	int sum = 0;
+        	while (count > 0) {
+        		count--;
+        		Node node = q.poll();
+        		sum += node.value;
+        		if (node.left != null) {
+        			q.offer(node.left);
+        		}
+        		
+        		if (node.right != null) {
+        			q.offer(node.right);
+        		}
+        	}
+        	
+        	result = Math.max(result, sum);
         }
-
+        
         return result;
     }
 
