@@ -1,5 +1,8 @@
 package me.whiteship.interview._05_tree_02;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BuildTree {
 
     private static class Node {
@@ -31,7 +34,34 @@ public class BuildTree {
      *  전위탐색(DLR): 1, 2, 4, 5, 3
      */
     private Node build(int[] inOrder, int[] preOrder) {
-        return null;
+    	for (int i = 0; i < inOrder.length; i++) {
+    		indexMap.put(inOrder[i], i);
+    	}
+    		
+    	
+        return buildRecurse(inOrder, preOrder, 0, inOrder.length - 1);
     }
+    
+    int preIndex = 0;
+    
+    Map<Integer, Integer> indexMap = new HashMap<>();
+    
+	private Node buildRecurse(int[] inOrder, int[] preOrder, int startIndex, int endIndex) {
+		if (startIndex > endIndex) {
+			return null;
+		}
+		
+		Node node = new Node(preOrder[preIndex++]);
+		
+		if (startIndex == endIndex) {
+			return node;
+		}
+		
+		int inIndex = indexMap.get(node.value);
+		node.left = buildRecurse(inOrder, preOrder, startIndex, inIndex - 1);
+		node.right = buildRecurse(inOrder, preOrder, inIndex + 1, endIndex);
+		
+		return node;
+	}
 
 }
