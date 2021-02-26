@@ -26,26 +26,45 @@ public class QueueStack {
 
     }
 
+//    private Integer pop() {
+//        if (q1.isEmpty()) {
+//        	return null;
+//        }
+//        
+//        return q1.poll();
+//    }
+//
+//    private void push(int number) {
+//        q2.offer(number);
+//        while (!q1.isEmpty()) {
+//        	q2.offer(q1.poll());
+//        }
+//        
+//        Queue<Integer> temp = q1;
+//        q1 = q2;
+//        q2 = temp;
+//    }
+    
     private Integer pop() {
-        if (q1.isEmpty()) {
-            return null;
-        }
-
-        while (q1.size() > 1) {
-            q2.offer(q1.poll());
-        }
-
-        Integer result = q1.poll();
-
-        Queue<Integer> temp = q1;
-        q1 = q2;
-        q2 = temp;
-
-        return result;
+    	if (q1.isEmpty()) {
+    		return null;
+    	}
+    	
+    	while (q1.size() > 1) {
+    		q2.offer(q1.poll());
+    	}
+    	
+    	Integer result = q1.poll();
+    	
+    	Queue<Integer> temp = q1;
+    	q1 = q2;
+    	q2 = temp;
+    	
+    	return result;
     }
-
+    
     private void push(int number) {
-        q1.offer(number);
+    	q1.offer(number);
     }
 
 }
