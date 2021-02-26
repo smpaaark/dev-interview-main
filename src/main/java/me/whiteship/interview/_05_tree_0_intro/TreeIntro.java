@@ -28,26 +28,26 @@ public class TreeIntro {
     }
 
     private void ldr1(Node root) {
-        if (root == null) {
-            return;
-        }
-
-        Stack<Node> stack = new Stack<>();
-
-        while(true) {
-            while (root != null) {
-                stack.push(root);
-                root = root.left;
-            }
-
-            if (stack.isEmpty()) {
-                break;
-            }
-
-            root = stack.pop();
-            System.out.println(root.value);
-            root = root.right;
-        }
+       if (root == null) {
+    	   return;
+       }
+       
+       Stack<Node> stack = new Stack<>();
+       
+       while (true) {
+    	   while (root != null) {
+    		   stack.push(root);
+    		   root = root.left;
+    	   }
+    	   
+    	   if (stack.isEmpty()) {
+    		   break;
+    	   }
+    	   
+    	   root = stack.pop();
+    	   System.out.println(root.value);
+    	   root = root.right;
+       }
     }
 
 
