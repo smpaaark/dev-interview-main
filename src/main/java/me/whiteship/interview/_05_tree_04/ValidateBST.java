@@ -25,7 +25,24 @@ public class ValidateBST {
     /**
      * TODO 주어진 이진 트리가 BST 인지 확인하는 코드를 작성하라.
      */
+    
+    private Node prevNode;
+    
     private boolean solution(Node node) {
-        return true;
+    	if (node != null) {
+    		if (solution(node.left)) {
+    			return false;
+    		}
+    		
+    		if (prevNode != null && node.value <= prevNode.value) {
+    			return false;
+    		}
+    		
+    		prevNode = node;
+    		return solution(node.right);
+    	}
+    	
+    	return true;
     }
+
 }
